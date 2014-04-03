@@ -1,4 +1,4 @@
-/*global alert,confirm:false */
+/*global confirm:false */
 
 'use strict';
 
@@ -7,7 +7,7 @@ angular.module('apps4europeAdminInterfaceApp')
 
     if ( $routeParams.id ) {
       $scope.editMode = true;
-      var eventId = $routeParams.id;
+      $scope.eventId = $routeParams.id;
       $http({
         method:'GET',
         url:appSettings.urls.events + '/' + $routeParams.id,
@@ -35,7 +35,7 @@ angular.module('apps4europeAdminInterfaceApp')
       if ( $scope.editMode ) {
         $http({
           method:'PUT',
-          url:appSettings.urls.events + '/' + eventId,
+          url:appSettings.urls.events + '/' + $scope.eventId,
           data: $scope.formData
         })
         .success(function(data) {
@@ -73,7 +73,17 @@ angular.module('apps4europeAdminInterfaceApp')
 
     $scope.deleteEvent = function() {
       if ( confirm('Are you sure you want to delete the event? This cannot be undone.') ) {
-        alert('TODO');
+        $http({
+          url:appSettings.urls.events + '/' + $scope.eventId,
+          method: 'DELETE'
+        })
+        .success(function() {
+          window.apps4eu.message = {
+            type: 'success',
+            message: 'Event deleted successfully.'
+          };
+          $location.path('/events');
+        });
       }
     };
   });

@@ -8,6 +8,9 @@ angular.module('apps4europeAdminInterfaceApp')
     $scope.createdEvent = window.apps4eu.createdEvent;
     delete window.apps4eu.createdEvent;
 
+    $scope.message = window.apps4eu.message;
+    delete window.apps4eu.message;
+
     $scope.embedCodeUrl = appSettings.urls.embedCode;
 
     $http({
