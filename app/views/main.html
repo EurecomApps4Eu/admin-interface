@@ -11,9 +11,7 @@
   <div class="col-md-6">
     <h4>Events</h4>
     <div class="list">
-      <a href="#">Dapibus ac facilisis in</a>
-      <a href="#">Morbi leo risus</a>
-      <a href="#">Porta ac consectetur ac</a>
+      <a ng-repeat="event in events" href="/events/{{event._id}}/edit">{{$index + 1}}. {{event.title}}</a>
     </div>
     <a class="btn btn-default" href="/events">See all</a><br>
     <a class="btn btn-primary" href="/events/new"><i class="glyphicon glyphicon-plus"></i> Add Event</a>
@@ -22,9 +20,9 @@
   <div class="col-md-6">
     <h4>Apps</h4>
     <div class="list">
-      <a href="#">Dapibus ac facilisis in</a>
-      <a href="#">Morbi leo risus</a>
-      <a href="#">Porta ac consectetur ac</a>
+      <a href="#">1. Dapibus ac facilisis in</a>
+      <a href="#">2. Morbi leo risus</a>
+      <a href="#">3. Porta ac consectetur ac</a>
     </div>
     <a class="btn btn-default" href="#">See all</a><br>
     <a class="btn btn-primary" href="#"><i class="glyphicon glyphicon-plus"></i> Add App</a>

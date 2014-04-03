@@ -1,10 +1,15 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, $http, appSettings) {
+
+    // Fetch latest events
+    $http({
+      url: appSettings.urls.events + '?sort=-startDate&limit=5',
+      method: 'GET'
+    })
+    .success(function(data) {
+      $scope.events = data;
+    });
+
   });
