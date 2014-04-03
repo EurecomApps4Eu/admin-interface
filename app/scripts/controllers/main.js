@@ -14,4 +14,13 @@ angular.module('apps4europeAdminInterfaceApp')
       $scope.events = data;
     });
 
+    // Fetch latest apps
+    $http({
+      url: appSettings.urls.applications + '?sort=-_id&limit=5',
+      method: 'GET'
+    })
+    .success(function(data) {
+      $scope.apps = data;
+    });
+
   });

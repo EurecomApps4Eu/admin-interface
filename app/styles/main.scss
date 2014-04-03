@@ -75,6 +75,8 @@ body {
   }
 
   .list {
+    margin-bottom:.5em;
+
     a {
       display:block;
       padding:.4em 0;
@@ -89,6 +91,14 @@ body {
 
 pre {
   margin:1em 0 .5em 0;
+}
+
+h2 {
+  margin-bottom:.8em;
+
+  .btn {
+    margin-left:2em;
+  }
 }
 
 @import 'event';

@@ -27,6 +27,10 @@ var app = angular
         templateUrl: 'views/forms/event.html',
         controller: 'EventFormCtrl'
       })
+      .when('/apps', {
+        templateUrl: 'views/apps.html',
+        controller: 'AppCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -38,7 +42,8 @@ app.factory('appSettings', function() {
   return {
     urls: {
       embedCode: 'TODO:INSERT-HERE',
-      events: BASE_URL + '/events'
+      events: BASE_URL + '/events',
+      applications: BASE_URL + '/applications'
     }
   };
 });
