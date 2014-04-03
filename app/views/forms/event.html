@@ -1,0 +1,78 @@
+<div class="header">
+  <h3 class="text-muted">LOGO</h3>
+  <ul class="nav nav-pills">
+    <li><a ng-href="/">Home</a></li>
+    <li><a ng-href="/events">Events</a></li>
+    <li><a ng-href="/apps">Apps</a></li>
+  </ul>
+</div>
+
+<div class="row event">
+  <div class="col-md-12">
+    <h2 ng-show="!editMode">Create event</h2>
+    <h2 ng-show="editMode">Edit event</h2>
+    <form role="form" ng-submit="saveEvent()">
+      <fieldset>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" ng-model="formData.title" id="title" placeholder="Enter title">
+        </div>
+
+        <div class="form-group date">
+          <label for="startDate">Start date</label>
+          <input type="date" class="form-control" ng-model="formData.startDate" id="startDate" placeholder="Start date">
+        </div>
+        –
+        <div class="form-group date endDate">
+          <label for="endDate">End date</label>
+          <input type="date" class="form-control" ng-model="formData.endDate" id="endDate" placeholder="End date">
+        </div>
+
+        <div class="form-group">
+          <label for="text">Description</label>
+          <textarea class="form-control" id="text" ng-model="formData.text" placeholder="Enter event description. TODO: Change this to WYSIWYG"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Prizes</legend>
+        <div class="alert alert-info"><i class="glyphicon glyphicon-info-sign"></i> TODO: insert informative help text here...</div>
+        <div class="form-group">
+          <label for="firstPrize">First prize</label>
+          <input type="text" class="form-control" ng-model="formData.firstPrize" id="firstPrize" placeholder="Enter first prize">
+        </div>
+        <div class="form-group">
+          <label for="secondPrize">Second prize</label>
+          <input type="text" class="form-control" ng-model="formData.secondPrize" id="secondPrize" placeholder="Enter second prize">
+        </div>
+        <div class="form-group">
+          <label for="thirdPrize">Third prize</label>
+          <input type="text" class="form-control" ng-model="formData.thirdPrize" id="thirdPrize" placeholder="Enter third prize">
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Jury</legend>
+        <div class="alert alert-info"><i class="glyphicon glyphicon-info-sign"></i> TODO: insert informative help text here...</div>
+        <div class="form-group juryMembers" ng-repeat="juryMember in formData.juryMembers">
+          <label for="juryMember{{$index}}">Jury member</label>
+          <input type="text" class="form-control" ng-model="formData.juryMembers[$index].name" id="juryMember{{$index}}" placeholder="Enter jury member name here">
+          <button type="button" ng-click="deleteJuryMember($index)" class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i> delete</button>
+        </div>
+        <button type="button" class="btn btn-default" ng-click="addJuryMember()">
+          <i class="glyphicon glyphicon-plus"></i> Add new member
+        </button>
+      </fieldset>
+
+      <fieldset>
+        <button ng-show="!editMode" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Create event</button>
+        <button ng-show="editMode" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Save event</button>
+        <button ng-show="editMode" ng-click="deleteEvent()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete event</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<div class="footer">
+  <p><span class="glyphicon glyphicon-envelope"></span> TODO: insert e-mail here</p>
+</div>

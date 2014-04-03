@@ -1,0 +1,36 @@
+form {
+  margin-bottom:2em;
+
+  fieldset {
+    margin-bottom:3em;
+
+    legend {
+      text-transform:uppercase;
+    }
+  }
+
+  .date {
+    display:inline-block;
+    width:40%;
+  }
+
+  .btn-danger {
+    float:right;
+  }
+
+  .juryMembers {
+
+    label {
+      display:block;
+    }
+
+    input {
+      display:inline-block;
+      width:50%;
+    }
+
+    button {
+      vertical-align:top;
+    }
+  }
+}

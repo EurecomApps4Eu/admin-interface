@@ -1,6 +1,6 @@
 'use strict';
 
-angular
+var app = angular
   .module('apps4europeAdminInterfaceApp', [
     'ngCookies',
     'ngResource',
@@ -17,20 +17,31 @@ angular
         templateUrl: 'views/events.html',
         controller: 'EventCtrl'
       })
+      .when('/events/new', {
+        templateUrl: 'views/forms/event.html',
+        controller: 'EventFormCtrl'
+      })
+      .when('/events/:id/edit', {
+        templateUrl: 'views/forms/event.html',
+        controller: 'EventFormCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
   });
 
-// Tmp fix for links
-$(document).on('ready', function() {
-  $('body').on('click', 'a', function(e) {
-    var $el = $(this);
+app.factory('appSettings', function() {
 
-    // Test for relative links
-    var href = $el.attr('href');
-    if ( href.indexOf('//') === -1 && href.indexOf('/#/') === -1 ) {
-      $el.attr('href', '/#' + href);
+  var BASE_URL = 'http://localhost:3000';
+
+  return {
+    urls: {
+      embedCode: 'TODO:INSERT-HERE',
+      events: BASE_URL + '/events'
     }
-  });
+  };
 });
+
+// Need to attach one global variable to the window object
+// (this is for storing data temporarily)
+window.apps4eu = {};
