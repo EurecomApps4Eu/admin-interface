@@ -3,7 +3,9 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('EventFormCtrl', function ($scope, $http, $location, appSettings, $routeParams) {
+  .controller('EventFormCtrl', function ($scope, $http, $location, appSettings, $routeParams, menu) {
+
+    menu('events');
 
     if ( $routeParams.id ) {
       $scope.editMode = true;

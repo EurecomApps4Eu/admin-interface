@@ -1,3 +1,5 @@
+/*global $:false */
+
 'use strict';
 
 var app = angular
@@ -31,7 +33,6 @@ var app = angular
   });
 
 app.factory('appSettings', function() {
-
   var BASE_URL = 'http://localhost:3000';
 
   return {
@@ -39,6 +40,14 @@ app.factory('appSettings', function() {
       embedCode: 'TODO:INSERT-HERE',
       events: BASE_URL + '/events'
     }
+  };
+});
+
+var $menu = $('#mainmenu');
+app.factory('menu', function() {
+  return function(page) {
+    $menu.find('.active').removeClass('active');
+    $menu.find('[data-page="' + page + '"]').addClass('active');
   };
 });
 

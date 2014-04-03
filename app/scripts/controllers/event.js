@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('EventCtrl', function ($scope, $http, appSettings) {
+  .controller('EventCtrl', function ($scope, $http, appSettings, menu) {
+
+    menu('events');
 
     // After creating a new event, the user is redirected into this
     // view and the newly created event is available in this var.
