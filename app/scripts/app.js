@@ -41,7 +41,7 @@ app.factory('appSettings', function() {
 
   return {
     urls: {
-      embedCode: 'TODO:INSERT-HERE',
+      embedCode: 'http://localhost/EurecomProject/apps4europe-frontend/dist/app.bundle.js',
       events: BASE_URL + '/events',
       applications: BASE_URL + '/applications'
     }
