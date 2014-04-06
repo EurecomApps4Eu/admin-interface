@@ -11,12 +11,17 @@
 
         <div class="form-group date">
           <label for="startDate">Start date</label>
-          <input type="date" class="form-control" ng-model="formData.startDate" id="startDate" placeholder="Start date">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <input type="text" bs-datepicker data-autoclose="true" data-date-format="yyyy-MM-dd" class="form-control" ng-model="formData.startDate" id="startDate" placeholder="Start date">
+          </div>
         </div>
-        –
         <div class="form-group date endDate">
           <label for="endDate">End date</label>
-          <input type="date" class="form-control" ng-model="formData.endDate" id="endDate" placeholder="End date">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <input type="text" bs-datepicker data-autoclose="true" data-date-format="yyyy-MM-dd" class="form-control" ng-model="formData.endDate" id="endDate" placeholder="End date">
+          </div>
         </div>
 
         <div class="form-group">

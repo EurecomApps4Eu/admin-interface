@@ -7,7 +7,8 @@ var app = angular
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngRoute'
+    'ngRoute',
+    'mgcrea.ngStrap.datepicker'
   ])
   .config(function ($routeProvider) {
     $routeProvider
