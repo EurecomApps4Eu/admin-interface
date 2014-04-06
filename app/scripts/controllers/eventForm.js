@@ -1,4 +1,4 @@
-/*global confirm:false */
+/*global confirm,$:false */
 
 'use strict';
 
@@ -6,6 +6,21 @@ angular.module('apps4europeAdminInterfaceApp')
   .controller('EventFormCtrl', function ($scope, $http, $location, appSettings, $routeParams, menu) {
 
     menu('events');
+
+    // Init wysiwyg
+    var $text = $('#text');
+    $text.summernote({
+      height:200,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'italic', 'underline']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link']],
+        ['view', ['fullscreen']]
+      ]
+    });
+
 
     if ( $routeParams.id ) {
       $scope.editMode = true;
@@ -16,6 +31,9 @@ angular.module('apps4europeAdminInterfaceApp')
       })
       .success(function(data) {
         $scope.formData = data;
+
+        // Need to init wysiwyg separately
+        $text.code(data.text);
       });
     }
     else {
@@ -33,6 +51,10 @@ angular.module('apps4europeAdminInterfaceApp')
     };
 
     $scope.saveEvent = function() {
+
+      // Need to set wysiwyg field manually, because two-way binding
+      // doesn't work on it.
+      $scope.formData.text = $text.code();
 
       if ( $scope.editMode ) {
         $http({
