@@ -51,7 +51,7 @@
         <legend>Connected Apps</legend>
         <div class="form-group">
           <ul>
-            <li ng-repeat="app in apps"><a href="/apps/{{app._id}}">{{app.title}}</a></li>
+            <li ng-repeat="app in apps"><a href="/apps/{{app._id}}/edit">{{app.title}}</a></li>
           </ul>
           <div class="alert alert-info" ng-show="!apps||apps.length==0"><i class="glyphicon glyphicon-info-sign"></i> No connected apps found.</div>
         </div>

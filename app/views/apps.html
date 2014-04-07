@@ -32,7 +32,7 @@
             <span ng-show="app.published" class="label label-success">published</span>
             <span ng-show="!app.published" class="label label-danger">unpublished</span>
           </td>
-          <td><a href="/events/{{app.connectedEvent._id}}"><span class="badge">{{app.connectedEvent.title}}</span></a></td>
+          <td><a href="/events/{{app.connectedEvent._id}}/edit"><span class="badge">{{app.connectedEvent.title}}</span></a></td>
           <td><a href="/apps/{{app._id}}/edit"><i class="glyphicon glyphicon-pencil"></i> edit</a></td>
         </tr>
         <tr class="noResults" ng-hide="filteredApps.length">

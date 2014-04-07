@@ -1,6 +1,6 @@
 <div class="well">
-  <h2>Short introduction here?</h2>
-  <p>Lorem ipsum dolor sit amet...</p>
+  <h2>Notifications will come here</h2>
+  <p>List apps that have been submitted but not yet published.</p>
 </div>
 
 <div class="row frontpage">
@@ -18,7 +18,7 @@
     <div class="list">
       <a ng-repeat="app in apps" href="/apps/{{app._id}}/edit">{{$index + 1}}. {{app.title}}</a>
     </div>
-    <a class="btn btn-default" href="#">See all</a><br>
-    <a class="btn btn-primary" href="#"><i class="glyphicon glyphicon-plus"></i> Add App</a>
+    <a class="btn btn-default" href="/apps">See all</a><br>
+    <a class="btn btn-primary" href="/apps/new"><i class="glyphicon glyphicon-plus"></i> Add App</a>
   </div>
 </div>

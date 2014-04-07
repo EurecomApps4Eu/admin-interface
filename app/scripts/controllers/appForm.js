@@ -7,6 +7,10 @@ angular.module('apps4europeAdminInterfaceApp')
 
     menu('apps');
 
+    $scope.title = 'Add app';
+    $scope.saveBtnTitle = $scope.title;
+    $scope.saveMsg = 'App added successfully.';
+
     events.get(function(error, events) {
       $scope.events = events;
     });
@@ -31,6 +35,10 @@ angular.module('apps4europeAdminInterfaceApp')
     };
 
     if ( $routeParams.id ) {
+      $scope.title = 'Edit app';
+      $scope.saveBtnTitle = 'Save app';
+      $scope.saveMsg = 'App saved successfully.';
+
       $scope.editMode = true;
       $scope.appId = $routeParams.id;
       apps.get({id: $scope.appId}, function(error, data) {
@@ -44,6 +52,27 @@ angular.module('apps4europeAdminInterfaceApp')
         // Need to init wysiwyg separately
         $text.code(data.text);
       });
+    }
+
+    // If initialized from event page
+    if ( $routeParams.modal ) {
+      $scope.title = 'Submit app';
+      $scope.saveBtnTitle = $scope.title;
+
+      $scope.formData.published = false;
+      $scope.modal = true;
+      $scope.formData.connectedEvent = $routeParams.connectedEvent;
+      $('body').addClass('isModal');
+
+      (function updateModalHeight() {
+        window.parent.postMessage(JSON.stringify({
+          fn: 'setModalHeight',
+          argument: $('#ngView').innerHeight()
+        }), '*');
+
+        setTimeout(updateModalHeight, 500);
+      })();
+
     }
 
     $scope.setEvent = function() {
@@ -71,9 +100,14 @@ angular.module('apps4europeAdminInterfaceApp')
           // TODO
         }
 
+        if ( $scope.modal ) {
+          $scope.modalSaved = true;
+          return;
+        }
+
         window.apps4eu.message = {
           type: 'success',
-          message: 'App saved successfully.'
+          message: $scope.saveMsg
         };
         $location.path('/apps');
       });
@@ -89,5 +123,11 @@ angular.module('apps4europeAdminInterfaceApp')
           $location.path('/apps');
         });
       }
+    };
+
+    $scope.closeModal = function() {
+      window.parent.postMessage(JSON.stringify({
+        fn: 'closeModal'
+      }), '*');
     };
   });

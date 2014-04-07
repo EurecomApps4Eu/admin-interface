@@ -1,8 +1,7 @@
 <div class="row event">
   <div class="col-md-12">
-    <h2 ng-show="!editMode">Add app</h2>
-    <h2 ng-show="editMode">Edit app</h2>
-    <form role="form" ng-submit="saveApp()">
+    <h2>{{title}}</h2>
+    <form role="form" ng-hide="modalSaved" ng-submit="saveApp()">
       <fieldset>
         <div class="form-group">
           <label for="title">Title</label>
@@ -14,7 +13,7 @@
           <textarea class="form-control wysiwyg" id="text"></textarea>
         </div>
 
-        <div class="form-group radioGroup">
+        <div class="form-group radioGroup" ng-hide="modal">
           <label>App status</label><br>
           <label class="first">
             <input type="radio" ng-model="formData.published" id="status1" value="1">
@@ -38,7 +37,7 @@
         </div>
       </fieldset>
 
-      <fieldset>
+      <fieldset ng-hide="modal">
         <legend>Connected Event</legend>
         <div class="form-group" ng-class="{'has-error':invalidEvent}">
           <input ng-change="setEvent()" type="text" class="form-control" ng-model="connectedEventTitle" ng-options="event.title as event.title for event in events" placeholder="Enter event title" bs-typeahead>
@@ -47,10 +46,20 @@
       </fieldset>
 
       <fieldset>
-        <button ng-show="!editMode" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Add app</button>
-        <button ng-show="editMode" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Save app</button>
-        <button ng-show="editMode" ng-click="deleteApp()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete app</button>
+        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> {{saveBtnTitle}}</button>
+        <button type="button" class="btn btn-default" ng-click="closeModal()" ng-show="modal">Cancel</button>
+        <button ng-show="editMode" ng-click="deleteApp()" type="button" class="btn btn-danger">
+          <i class="glyphicon glyphicon-trash"></i>
+          Delete app
+        </button>
       </fieldset>
     </form>
+
+    <div class="col-md-12" ng-show="modalSaved">
+      <div class="alert alert-success">
+        Application submitted successfully. Please note that your application has to be approved by the administrators, before it becomes visible on the webpage.
+      </div>
+      <button class="btn btn-default" ng-click="closeModal()"><i class="fa fa-times"></i> Close window</button>
+    </div>
   </div>
 </div>
