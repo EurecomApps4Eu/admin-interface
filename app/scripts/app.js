@@ -18,7 +18,7 @@ var app = angular
       })
       .when('/events', {
         templateUrl: 'views/events.html',
-        controller: 'EventCtrl'
+        controller: 'EventsCtrl'
       })
       .when('/events/new', {
         templateUrl: 'views/forms/event.html',
@@ -30,7 +30,7 @@ var app = angular
       })
       .when('/apps', {
         templateUrl: 'views/apps.html',
-        controller: 'AppCtrl'
+        controller: 'AppsCtrl'
       })
       .when('/settings', {
         templateUrl: 'views/settings.html',

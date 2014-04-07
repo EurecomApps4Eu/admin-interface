@@ -3,7 +3,7 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('AppCtrl', function ($scope, $http, appSettings, menu) {
+  .controller('AppsCtrl', function ($scope, $http, appSettings, menu) {
 
     menu('apps');
 

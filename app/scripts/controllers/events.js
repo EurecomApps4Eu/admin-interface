@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('EventCtrl', function ($scope, $http, appSettings, menu) {
+  .controller('EventsCtrl', function ($scope, $http, appSettings, menu) {
 
     menu('events');
 
