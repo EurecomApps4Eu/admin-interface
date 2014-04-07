@@ -119,6 +119,14 @@ app.factory('apps', function($http, appSettings) {
       url: url,
     })
     .success(function(apps) {
+      if ( apps instanceof Array ) {
+        // Ensure that connected event is always present
+        $.each(apps, function(i, app) {
+          if ( !app.connectedEvent ) {
+            app.connectedEvent = '';
+          }
+        });
+      }
       callback(null, apps);
     })
     .error(function() {
