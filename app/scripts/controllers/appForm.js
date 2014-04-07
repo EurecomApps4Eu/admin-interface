@@ -25,7 +25,10 @@ angular.module('apps4europeAdminInterfaceApp')
       ]
     });
 
-    $scope.formData = {};
+    // Init default values
+    $scope.formData = {
+      published: true
+    };
 
     if ( $routeParams.id ) {
       $scope.editMode = true;
@@ -35,6 +38,7 @@ angular.module('apps4europeAdminInterfaceApp')
 
         if ( data.connectedEvent ) {
           $scope.connectedEventTitle = data.connectedEvent.title;
+          $scope.formData.connectedEvent = data.connectedEvent._id;
         }
 
         // Need to init wysiwyg separately

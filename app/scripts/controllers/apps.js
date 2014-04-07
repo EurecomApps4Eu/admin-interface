@@ -5,7 +5,15 @@ angular.module('apps4europeAdminInterfaceApp')
 
     menu('apps');
 
-    $scope.search = {};
+    $scope.search = {
+      published:''
+    };
+
+    $scope.statuses = [
+      {label:'Filter by status', value:''},
+      {label:'Published', value:true},
+      {label:'Unpublished', value:false}
+    ];
 
     if ( $routeParams.connectedEvent ) {
       $scope.search.connectedEvent = $routeParams.connectedEvent;

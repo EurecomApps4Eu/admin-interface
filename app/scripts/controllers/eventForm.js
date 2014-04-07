@@ -3,7 +3,7 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('EventFormCtrl', function ($scope, $http, $location, appSettings, $routeParams, menu) {
+  .controller('EventFormCtrl', function ($scope, $http, $location, apps, appSettings, $routeParams, menu) {
 
     menu('events');
 
@@ -21,6 +21,7 @@ angular.module('apps4europeAdminInterfaceApp')
       ]
     });
 
+    $scope.themes = appSettings.eventThemes;
 
     if ( $routeParams.id ) {
       $scope.editMode = true;
@@ -34,6 +35,13 @@ angular.module('apps4europeAdminInterfaceApp')
 
         // Need to init wysiwyg separately
         $text.code(data.text);
+      });
+
+      apps.get({connectedEvent:$scope.eventId}, function(error, apps) {
+        if ( error ) {
+          // TODO
+        }
+        $scope.apps = apps;
       });
     }
     else {

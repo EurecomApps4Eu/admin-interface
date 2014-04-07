@@ -58,7 +58,23 @@ app.factory('appSettings', function() {
       embedCode: 'http://localhost/EurecomProject/apps4europe-frontend/dist/app.bundle.js',
       events: BASE_URL + '/events',
       applications: BASE_URL + '/applications'
-    }
+    },
+    eventThemes: [
+      'Public administration & policy',
+      'Population',
+      'Culture/Sport/Leisure time',
+      'Territory',
+      'Health',
+      'Infrastructure',
+      'Audience (Youth/Adult/Senior)',
+      'Environment & Nature',
+      'Education & Lifelong learning',
+      'Tourism',
+      'Safety',
+      'Welfare',
+      'Work & Economy',
+      'Life/Home'
+    ]
   };
 });
 
@@ -101,8 +117,14 @@ app.factory('apps', function($http, appSettings) {
       if ( options.id ) {
         url += '/' + options.id + '?1=1';
       }
-      if ( options.select ) {
+      else if ( options.select ) {
         url += '?select=' + options.select;
+      }
+      else {
+        url += '?1=1';
+        $.each(options, function(key, value) {
+          url += '&' + key + '=' + value;
+        });
       }
     }
     else {

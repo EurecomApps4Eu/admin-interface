@@ -50,4 +50,13 @@ form {
   .datepicker.dropdown-menu {
     width:260px;
   }
+
+  .prizes {
+    .row:nth-child(2n) {
+      background:#f9f9f9;
+    }
+    .row {
+      padding:.5em 0;
+    }
+  }
 }

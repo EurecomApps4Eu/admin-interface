@@ -30,46 +30,113 @@
         </div>
 
         <div class="form-group">
+          <label for="registrationLink">Registration link</label>
+          <input type="text" class="form-control" ng-model="formData.registrationLink" id="registrationLink" placeholder="Enter a link to the registration for the event">
+        </div>
+
+        <div class="form-group">
+          <label for="theme">Theme</label>
+          <select class="form-control" ng-model="formData.theme" id="theme" ng-options="theme for theme in themes">
+            <option value="">Choose event theme</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label for="text">Description</label>
           <textarea class="form-control wysiwyg" id="text"></textarea>
         </div>
       </fieldset>
 
-      <fieldset>
+      <fieldset ng-show="eventId">
         <legend>Connected Apps</legend>
         <div class="form-group">
           <ul>
-            <li>First App</li>
-            <li>Second App</li>
+            <li ng-repeat="app in apps"><a href="/apps/{{app._id}}">{{app.title}}</a></li>
           </ul>
+          <div class="alert alert-info" ng-show="!apps||apps.length==0"><i class="glyphicon glyphicon-info-sign"></i> No connected apps found.</div>
         </div>
       </fieldset>
 
-      <fieldset>
+      <fieldset class="prizes">
         <legend>Prizes</legend>
-        <div class="alert alert-info"><i class="glyphicon glyphicon-info-sign"></i> TODO: insert informative help text here...</div>
-        <div class="form-group">
-          <label for="firstPrize">First prize</label>
-          <input type="text" class="form-control" ng-model="formData.firstPrize" id="firstPrize" placeholder="Enter first prize">
+        <div class="alert alert-info">
+          <i class="glyphicon glyphicon-info-sign"></i>
+          You can specify prizes for the winner, second place and third place below. Please enter in the first input the prize itself (for example 1000€) and then, in the second input, you can choose the app(s) that won the prize.
+          <br><i>Note! Only apps that have been connected to this event can be selected as winners for a prize. Apps can be connected to events from the app-editing page.</i>
         </div>
-        <div class="form-group">
-          <label for="secondPrize">Second prize</label>
-          <input type="text" class="form-control" ng-model="formData.secondPrize" id="secondPrize" placeholder="Enter second prize">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="firstPrize">First prize</label>
+              <input type="text" class="form-control" ng-model="formData.firstPrize" id="firstPrize" placeholder="Enter first prize, for example 1000€">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="firstPrizeWinners">First prize winners</label>
+              <select multiple="multiple" size="5" class="form-control" id="firstPrizeWinners" ng-model="formData.firstPrizeWinners" ng-options="app._id as app.title for app in apps">
+              </select>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="thirdPrize">Third prize</label>
-          <input type="text" class="form-control" ng-model="formData.thirdPrize" id="thirdPrize" placeholder="Enter third prize">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="secondPrize">Second prize</label>
+              <input type="text" class="form-control" ng-model="formData.secondPrize" id="secondPrize" placeholder="Enter second prize">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="secondPrizeWinners">Second prize winners</label>
+              <select multiple="multiple" size="5" class="form-control" id="secondPrizeWinners" ng-model="formData.secondPrizeWinners" ng-options="app._id as app.title for app in apps">
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="thirdPrize">Third prize</label>
+              <input type="text" class="form-control" ng-model="formData.thirdPrize" id="thirdPrize" placeholder="Enter third prize">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="thirdPrizeWinners">Third prize winners</label>
+              <select multiple="multiple" size="5" class="form-control" id="thirdPrizeWinners" ng-model="formData.thirdPrizeWinners" ng-options="app._id as app.title for app in apps">
+              </select>
+            </div>
+          </div>
         </div>
       </fieldset>
 
       <fieldset>
         <legend>Jury</legend>
-        <div class="alert alert-info"><i class="glyphicon glyphicon-info-sign"></i> TODO: insert informative help text here...</div>
-        <div class="form-group juryMembers" ng-repeat="juryMember in formData.juryMembers">
-          <label for="juryMember{{$index}}">Jury member</label>
-          <input type="text" class="form-control" ng-model="formData.juryMembers[$index].name" id="juryMember{{$index}}" placeholder="Enter jury member name here">
-          <button type="button" ng-click="deleteJuryMember($index)" class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i> delete</button>
+        <div class="alert alert-info">
+          <i class="glyphicon glyphicon-info-sign"></i>
+          You can specify the jury for the event below.
         </div>
+        <table class="table table-hover table-striped table-responsive">
+          <thead>
+            <tr>
+              <th>Name</th><th>E-mail</th><th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="juryMember in formData.juryMembers">
+              <td>
+                <input type="text" class="form-control" ng-model="formData.juryMembers[$index].name" placeholder="Enter jury member name">
+              </td>
+              <td>
+                <input type="email" class="form-control" ng-model="formData.juryMembers[$index].email" placeholder="Enter jury member e-mail">
+              </td>
+              <td>
+                <button type="button" ng-click="deleteJuryMember($index)" class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <button type="button" class="btn btn-default" ng-click="addJuryMember()">
           <i class="glyphicon glyphicon-plus"></i> Add new member
         </button>
