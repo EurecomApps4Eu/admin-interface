@@ -94,18 +94,25 @@ app.factory('events', function($http, appSettings) {
 
 app.factory('apps', function($http, appSettings) {
 
-  var get = function get(id, callback) {
+  var get = function get(options, callback) {
     var url = appSettings.urls.applications;
 
     if ( arguments.length === 2 ) {
-      url += '/' + id + '?1=1';
+      if ( options.id ) {
+        url += '/' + options.id + '?1=1';
+      }
+      if ( options.select ) {
+        url += '?select=' + options.select;
+      }
     }
     else {
-      callback = id;
+      callback = options;
       url += '?sort=-_id';
     }
 
-    url += '&populate=connectedEvent';
+    if ( !options.select ) {
+      url += '&populate=connectedEvent';
+    }
 
     $http({
       method: 'GET',

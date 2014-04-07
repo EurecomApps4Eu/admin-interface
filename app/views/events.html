@@ -20,7 +20,15 @@
         <tr ng-repeat="event in events">
           <td>{{event.title}}</td>
           <td>{{event.startDate | date:'shortDate'}} - {{event.endDate | date:'shortDate'}}</td>
-          <td><a href=""><span class="badge">4 apps</span></a></td>
+          <td>
+            <a href="/apps?connectedEvent={{event._id}}">
+              <span class="badge">
+                <span ng-show="eventApps[event._id] == 1">{{eventApps[event._id]}} app</span>
+                <span ng-show="eventApps[event._id] > 1">{{eventApps[event._id]}} apps</span>
+                <span ng-show="!eventApps[event._id]">0 apps</span>
+              </span>
+            </a>
+          </td>
           <td><a href="/events/{{event._id}}/edit"><i class="glyphicon glyphicon-pencil"></i> edit</a></td>
         </tr>
       </tbody>

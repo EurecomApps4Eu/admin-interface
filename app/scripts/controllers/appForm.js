@@ -30,10 +30,12 @@ angular.module('apps4europeAdminInterfaceApp')
     if ( $routeParams.id ) {
       $scope.editMode = true;
       $scope.appId = $routeParams.id;
-      apps.get($scope.appId, function(error, data) {
+      apps.get({id: $scope.appId}, function(error, data) {
         $scope.formData = data;
 
-        $scope.connectedEventTitle = data.connectedEvent.title;
+        if ( data.connectedEvent ) {
+          $scope.connectedEventTitle = data.connectedEvent.title;
+        }
 
         // Need to init wysiwyg separately
         $text.code(data.text);
