@@ -1,0 +1,43 @@
+<div class="row event">
+  <div class="col-md-12">
+    <h2 ng-show="!editMode">Add app</h2>
+    <h2 ng-show="editMode">Edit app</h2>
+    <form role="form" ng-submit="saveApp()">
+      <fieldset>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" ng-model="formData.title" id="title" placeholder="Enter title">
+        </div>
+
+        <div class="form-group">
+          <label for="text">Description</label>
+          <textarea class="form-control wysiwyg" id="text"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="homepage">Homepage</label>
+          <input type="url" class="form-control" ng-model="formData.homepage" id="homepage" placeholder="Enter app homepage">
+        </div>
+
+        <div class="form-group">
+          <label for="downloadUrl">Download URL</label>
+          <input type="url" class="form-control" ng-model="formData.downloadUrl" id="downloadUrl" placeholder="Enter app download URL">
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Connected Event</legend>
+        <div class="form-group" ng-class="{'has-error':invalidEvent}">
+          <input ng-change="setEvent()" type="text" class="form-control" ng-model="connectedEventTitle" ng-options="event.title as event.title for event in events" placeholder="Enter event title" bs-typeahead>
+          <div ng-show="invalidEvent" class="alert alert-danger">No matching event found!</div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <button ng-show="!editMode" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Add app</button>
+        <button ng-show="editMode" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Save app</button>
+        <button ng-show="editMode" ng-click="deleteApp()" type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete app</button>
+      </fieldset>
+    </form>
+  </div>
+</div>

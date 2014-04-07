@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('EventsCtrl', function ($scope, $http, appSettings, menu) {
+  .controller('EventsCtrl', function ($scope, $http, appSettings, menu, events) {
 
     menu('events');
 
@@ -15,11 +15,7 @@ angular.module('apps4europeAdminInterfaceApp')
 
     $scope.embedCodeUrl = appSettings.urls.embedCode;
 
-    $http({
-      method:'GET',
-      url:appSettings.urls.events + '?sort=-startDate',
-    })
-    .success(function(data) {
-      $scope.events = data;
+    events.get(function(error, events) {
+      $scope.events = events;
     });
   });
