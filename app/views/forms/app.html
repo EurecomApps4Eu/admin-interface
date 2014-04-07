@@ -14,6 +14,19 @@
           <textarea class="form-control wysiwyg" id="text"></textarea>
         </div>
 
+        <div class="form-group radioGroup">
+          <label>Apps status</label><br>
+          <label class="first">
+            <input type="radio" ng-model="formData.published" id="status1" value="1">
+            Published
+          </label>
+          <label>
+            <input type="radio" ng-model="formData.published" id="status2" value="0">
+            Unpublished
+          </label>
+          <div class="alert alert-info"><i class="glyphicon glyphicon-info-sign"></i> Only published apps are showed on event webpage.</div>
+        </div>
+
         <div class="form-group">
           <label for="homepage">Homepage</label>
           <input type="url" class="form-control" ng-model="formData.homepage" id="homepage" placeholder="Enter app homepage">

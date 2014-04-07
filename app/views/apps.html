@@ -18,8 +18,7 @@
             <input type="text" class="form-control" ng-model="search.title" placeholder="Filter by title">
           </td>
           <td>
-            <select class="form-control" ng-model="search.status" ng-options="value for value in ['published', 'unpublished']">
-              <option value="">Filter by status</option>
+            <select class="form-control" ng-model="search.published" ng-options="s.value as s.label for s in statuses">
             </select>
           </td>
           <td>
@@ -31,7 +30,7 @@
           <td>{{app.title}}</td>
           <td>
             <span ng-show="app.published" class="label label-success">published</span>
-            <span ng-show="!app.published" class="label label-danger">not published</span>
+            <span ng-show="!app.published" class="label label-danger">unpublished</span>
           </td>
           <td><a href="/events/{{app.connectedEvent._id}}"><span class="badge">{{app.connectedEvent.title}}</span></a></td>
           <td><a href="/apps/{{app._id}}/edit"><i class="glyphicon glyphicon-pencil"></i> edit</a></td>
