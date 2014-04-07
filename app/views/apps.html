@@ -27,7 +27,7 @@
           </td>
           <td></td>
         </tr>
-        <tr ng-repeat="app in apps|filter:search">
+        <tr ng-repeat="app in filteredApps = (apps|filter:search)">
           <td>{{app.title}}</td>
           <td>
             <span ng-show="app.published" class="label label-success">published</span>
@@ -35,6 +35,11 @@
           </td>
           <td><a href="/events/{{app.connectedEvent._id}}"><span class="badge">{{app.connectedEvent.title}}</span></a></td>
           <td><a href="/apps/{{app._id}}/edit"><i class="glyphicon glyphicon-pencil"></i> edit</a></td>
+        </tr>
+        <tr class="noResults" ng-hide="filteredApps.length">
+          <td colspan="4">
+            <div class="alert alert-info">No results</div>
+          </td>
         </tr>
       </tbody>
     </table>

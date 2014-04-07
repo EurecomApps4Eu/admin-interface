@@ -27,9 +27,9 @@
           <td></td>
           <td></td>
         </tr>
-        <tr ng-repeat="event in events|filter:search">
+        <tr ng-repeat="event in filteredEvents = (events|filter:search)">
           <td>{{event.title}}</td>
-          <td>{{event.startDate | date:'shortDate'}} - {{event.endDate | date:'shortDate'}}</td>
+          <td>{{event.startDate | date:'yyyy-MM-dd'}} – {{event.endDate | date:'yyyy-MM-dd'}}</td>
           <td>
             <a href="/apps?connectedEvent={{event.title}}">
               <span class="badge">
@@ -40,6 +40,11 @@
             </a>
           </td>
           <td><a href="/events/{{event._id}}/edit"><i class="glyphicon glyphicon-pencil"></i> edit</a></td>
+        </tr>
+        <tr class="noResults" ng-hide="filteredEvents.length">
+          <td colspan="4">
+            <div class="alert alert-info">No results</div>
+          </td>
         </tr>
       </tbody>
     </table>
