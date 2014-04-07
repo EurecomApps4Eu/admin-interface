@@ -4,7 +4,7 @@
 </div>
 
 <div class="row frontpage">
-  <div class="col-md-6">
+  <div class="col-md-6 column">
     <h4>Events</h4>
     <div class="list">
       <a ng-repeat="event in events" href="/events/{{event._id}}/edit">{{$index + 1}}. {{event.title}}</a>
@@ -13,7 +13,7 @@
     <a class="btn btn-primary" href="/events/new"><i class="glyphicon glyphicon-plus"></i> Add Event</a>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 column">
     <h4>Apps</h4>
     <div class="list">
       <a ng-repeat="app in apps" href="/apps/{{app._id}}/edit">{{$index + 1}}. {{app.title}}</a>
