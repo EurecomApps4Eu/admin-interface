@@ -1,11 +1,14 @@
 <div class="row event">
   <div class="col-md-12">
     <h2>{{title}}</h2>
-    <form role="form" ng-hide="modalSaved" ng-submit="saveApp()">
+    <form role="form" ng-hide="modalSaved" ng-submit="saveApp()" name="form">
       <fieldset>
         <div class="form-group">
           <label for="title">Title</label>
-          <input type="text" class="form-control" ng-model="formData.title" id="title" placeholder="Enter title">
+          <input name="title" required type="text" class="form-control" ng-model="formData.title" id="title" placeholder="Enter title">
+          <div class="alert alert-danger" ng-show="form.title.$dirty && form.title.$invalid">
+            Title is required.
+          </div>
         </div>
 
         <div class="form-group">
@@ -45,8 +48,12 @@
         </div>
       </fieldset>
 
+      <div class="alert alert-danger" ng-show="form.$invalid">
+        You must fill all required fields before you can save the app.
+      </div>
+
       <fieldset>
-        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> {{saveBtnTitle}}</button>
+        <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> {{saveBtnTitle}}</button>
         <button type="button" class="btn btn-default" ng-click="closeModal()" ng-show="modal">Cancel</button>
         <button ng-show="editMode" ng-click="deleteApp()" type="button" class="btn btn-danger">
           <i class="glyphicon glyphicon-trash"></i>
