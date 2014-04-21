@@ -3,9 +3,9 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('AppFormCtrl', function ($scope, $http, $location, appSettings, events, apps, $routeParams, menu) {
+  .controller('AppFormCtrl', function ($scope, $http, $location, appSettings, events, apps, $routeParams, initApp) {
 
-    menu('apps');
+    initApp('apps');
 
     $scope.title = 'Add app';
     $scope.saveBtnTitle = $scope.title;

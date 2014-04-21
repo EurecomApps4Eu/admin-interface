@@ -45,6 +45,14 @@ var app = angular
         templateUrl: 'views/settings.html',
         controller: 'SettingsCtrl'
       })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+      })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'RegisterCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -57,7 +65,9 @@ app.factory('appSettings', function() {
     urls: {
       embedCode: 'http://localhost/EurecomProject/apps4europe-frontend/dist/app.bundle.js',
       events: BASE_URL + '/events',
-      applications: BASE_URL + '/applications'
+      applications: BASE_URL + '/applications',
+      login: BASE_URL + '/login',
+      register: BASE_URL + '/users'
     },
     eventThemes: [
       'Public administration & policy',
@@ -79,8 +89,25 @@ app.factory('appSettings', function() {
 });
 
 var $menu = $('#mainmenu');
-app.factory('menu', function() {
+app.factory('initApp', function($rootScope, $location) {
+
+  $rootScope.signOut = function() {
+    localStorage.removeItem('user');
+    delete $rootScope.email;
+    $location.path('/login');
+  };
+
   return function(page) {
+    // Check if user is logged in
+    if ( !window.localStorage.getItem('user') && ['/login', '/register'].indexOf($location.path()) === -1 ) {
+      $location.path('/login');
+    }
+    else {
+      var user = JSON.parse(window.localStorage.getItem('user'));
+      $rootScope.email = user.email;
+    }
+
+    // Set active menu element
     $menu.find('.active').removeClass('active');
     $menu.find('[data-page="' + page + '"]').addClass('active');
   };

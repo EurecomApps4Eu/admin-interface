@@ -3,9 +3,9 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-.controller('EventsCtrl', function ($scope, $http, appSettings, menu, events, apps) {
+.controller('EventsCtrl', function ($scope, $http, appSettings, initApp, events, apps) {
 
-  menu('events');
+  initApp('events');
 
   $scope.eventApps = {};
 

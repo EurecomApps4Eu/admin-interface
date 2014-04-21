@@ -34,6 +34,10 @@
           <li data-page="apps"><a ng-href="/apps">Apps</a></li>
           <li data-page="settings"><a ng-href="/settings">Settings</a></li>
         </ul>
+        <div class="userinfo" ng-show="email">
+          Logged in as {{email}}<br>
+          <button class="btn btn-default" ng-click="signOut()" type="button"><i class="fa fa-sign-out"></i> Sign out</button>
+        </div>
       </div>
 
       <div id="ngView" ng-view=""></div>
@@ -86,6 +90,8 @@
         <script src="scripts/controllers/settings.js"></script>
         <script src="scripts/controllers/eventForm.js"></script>
         <script src="scripts/controllers/appForm.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/register.js"></script>
         <!-- endbuild -->
 </body>
 </html>

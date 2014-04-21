@@ -3,9 +3,12 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('EventFormCtrl', function ($scope, $http, $location, apps, appSettings, $routeParams, menu) {
+  .controller('EventFormCtrl', function ($scope, $http, $location, apps, appSettings, $routeParams, initApp) {
 
-    menu('events');
+    initApp('events');
+
+    // TODO: create factory/service for user
+    var user = JSON.parse(window.localStorage.getItem('user'));
 
     // Init wysiwyg
     var $text = $('#text');
@@ -68,7 +71,10 @@ angular.module('apps4europeAdminInterfaceApp')
         $http({
           method:'PUT',
           url:appSettings.urls.events + '/' + $scope.eventId,
-          data: $scope.formData
+          data: $scope.formData,
+          headers: {
+            Authorization: 'Token ' + user.token
+          }
         })
         .success(function(data) {
 
@@ -84,7 +90,10 @@ angular.module('apps4europeAdminInterfaceApp')
         $http({
           method:'POST',
           url:appSettings.urls.events,
-          data: $scope.formData
+          data: $scope.formData,
+          headers: {
+            Authorization: 'Token ' + user.token
+          }
         })
         .success(function(data) {
 

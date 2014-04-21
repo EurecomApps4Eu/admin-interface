@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('MainCtrl', function ($scope, $http, appSettings, menu) {
+  .controller('MainCtrl', function ($scope, $http, appSettings, initApp) {
 
-    menu('main');
+    initApp('main');
 
     // Fetch latest events
     $http({

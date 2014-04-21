@@ -29,6 +29,16 @@ body {
 /* Custom page header */
 .header {
     border-bottom: 1px solid #e5e5e5;
+    overflow:hidden;
+
+    #mainmenu {
+      float:left;
+    }
+
+    .userinfo {
+      float:right;
+      text-align:right;
+    }
 }
 
 /* Make the masthead heading the same height as the navigation */
@@ -103,6 +113,10 @@ h2 {
   .btn {
     margin-left:2em;
   }
+}
+
+#loginForm input, #registerForm input {
+  margin-bottom:.5em;
 }
 
 @import 'event';

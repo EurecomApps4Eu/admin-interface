@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('AppsCtrl', function ($scope, $http, apps, menu, $routeParams) {
+  .controller('AppsCtrl', function ($scope, $http, apps, initApp, $routeParams) {
 
-    menu('apps');
+    initApp('apps');
 
     $scope.search = {
       published:''
