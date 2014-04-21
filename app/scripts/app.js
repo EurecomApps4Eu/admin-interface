@@ -67,7 +67,8 @@ app.factory('appSettings', function() {
       events: BASE_URL + '/events',
       applications: BASE_URL + '/applications',
       login: BASE_URL + '/login',
-      register: BASE_URL + '/users'
+      register: BASE_URL + '/users',
+      users: BASE_URL + '/users'
     },
     eventThemes: [
       'Public administration & policy',

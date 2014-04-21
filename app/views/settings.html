@@ -1,8 +1,11 @@
 <div class="row">
   <div class="col-md-12">
     <h2>Settings</h2>
-    <div class="alert alert-danger">THIS PAGE IS NOT IMPLEMENTED</div>
-    <form role="form" autocomplete="off">
+    <div ng-show="success" class="alert alert-success alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      Settings saved successfully.
+    </div>
+    <form role="form" autocomplete="off" ng-submit="save()">
       <fieldset>
         <div class="form-group">
           <label for="email">E-mail</label>
@@ -15,12 +18,10 @@
         <div class="form-group radioGroup">
           <label>Receive e-mail notification when new apps are submitted?</label><br>
           <label class="first">
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-            Yes
+            <input type="radio" ng-model="formData.emailNotifications" value="1" checked> Yes
           </label>
           <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-            No
+            <input type="radio" ng-model="formData.emailNotifications" value="0"> No
           </label>
         </div>
       </fieldset>
