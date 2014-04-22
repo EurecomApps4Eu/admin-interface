@@ -31,7 +31,8 @@ angular.module('apps4europeAdminInterfaceApp')
 
     // Init default values
     $scope.formData = {
-      published: true
+      published: true,
+      datasets: ['']
     };
 
     if ( $routeParams.id ) {
