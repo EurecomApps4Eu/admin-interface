@@ -231,6 +231,24 @@ app.factory('apps', function($http, appSettings) {
 
 });
 
+// TODO: send the auth token always here, instead of in the individual functions
+app.factory('httpRequestInterceptor', function () {
+  return {
+    request: function (config) {
+      $('body').addClass('loading');
+      return config;
+    },
+    response: function(response) {
+      $('body').removeClass('loading');
+      return response;
+    }
+  };
+});
+
+app.config(function ($httpProvider) {
+  $httpProvider.interceptors.push('httpRequestInterceptor');
+});
+
 // Need to attach one global variable to the window object
 // (this is for storing data temporarily)
 window.apps4eu = {};
