@@ -9,7 +9,7 @@ $(document).on('ready', function() {
 
     // Test for relative links
     var href = $el.attr('href');
-    if ( href.indexOf('//') === -1 && href.indexOf('/#/') === -1 ) {
+    if ( href && href.indexOf('//') === -1 && href.indexOf('/#/') === -1 ) {
       $el.attr('href', '/#' + href);
     }
   });

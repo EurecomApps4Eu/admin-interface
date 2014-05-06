@@ -3,7 +3,7 @@
 'use strict';
 
 angular.module('apps4europeAdminInterfaceApp')
-  .controller('AppFormCtrl', function ($scope, $http, $location, appSettings, events, apps, $routeParams, initApp) {
+  .controller('AppFormCtrl', function ($scope, $http, $location, appSettings, events, apps, $routeParams, initApp, $upload) {
 
     initApp('apps');
 
@@ -32,7 +32,8 @@ angular.module('apps4europeAdminInterfaceApp')
     // Init default values
     $scope.formData = {
       published: true,
-      datasets: ['']
+      datasets: [''],
+      images: []
     };
 
     if ( $routeParams.id ) {
@@ -44,6 +45,46 @@ angular.module('apps4europeAdminInterfaceApp')
       $scope.appId = $routeParams.id;
       apps.get({id: $scope.appId}, function(error, data) {
         $scope.formData = data;
+
+        // Ensure images are initialize
+        if ( !$scope.formData.images ) {
+          $scope.formData.images = [];
+        }
+        else {
+          var rawImages = $scope.formData.images.slice();
+          $scope.formData.images = [];
+
+          angular.forEach(rawImages, function(img) {
+
+            var src;
+            var name;
+
+            if ( img.indexOf('://') !== -1 ) {
+              src = img;
+              var parts = img.split('/');
+              name = parts[parts.length - 1];
+            }
+            else {
+              src = appSettings.urls.staticFiles + '/images/' + $scope.appId + '/' + img;
+              name = img;
+            }
+
+            $scope.formData.images.push({
+              src: src,
+              name: name,
+              isUploading: function() {
+                return false;
+              },
+              progress: function() {
+                return 100;
+              },
+              getPreview: function() {
+                return src;
+              }
+            });
+
+          });
+        }
 
         if ( data.connectedEvent ) {
           $scope.connectedEventTitle = data.connectedEvent.title;
@@ -130,5 +171,87 @@ angular.module('apps4europeAdminInterfaceApp')
       window.parent.postMessage(JSON.stringify({
         fn: 'closeModal'
       }), '*');
+    };
+
+    $scope.addUrlImage = function() {
+      var parts = $scope.imageUrl.split('/');
+      var name = parts[parts.length - 1];
+      var src = $scope.imageUrl;
+      $scope.imageUrl = '';
+
+      $scope.formData.images.push({
+        src: src,
+        name: name,
+        isUploading: function() {
+          return false;
+        },
+        progress: function() {
+          return 100;
+        },
+        getPreview: function() {
+          return src;
+        }
+      });
+    };
+
+    $scope.cancelImage = function(index) {
+      var image = $scope.formData.images.splice(index, 1);
+      if ( image.isUploading && image.abort ) {
+        image.abort();
+      }
+    };
+
+    $scope.onFileSelect = function($files) {
+      //$files: an array of files selected, each file has name, size, and type.
+
+      angular.forEach($files, function(file) {
+
+        var image;
+        var src;
+        var percent;
+        var isUploading = true;
+
+        $scope.upload = $upload.upload({
+          url: appSettings.urls.imageUpload, //upload.php script, node.js route, or servlet url
+          method: 'POST',
+          // headers: {'header-key': 'header-value'},
+          // withCredentials: true,
+          file: file, // or list of files: $files for html5 only
+          /* set the file formData name ('Content-Desposition'). Default is 'file' */
+          //fileFormDataName: myFile, //or a list of names for multiple files (html5).
+          /* customize how data is added to formData. See #40#issuecomment-28612000 for sample code */
+          //formDataAppender: function(formData, key, val){}
+        }).progress(function(evt) {
+          percent = parseInt(100.0 * evt.loaded / evt.total);
+        }).success(function(response) {
+          isUploading = false;
+          image.tmpName = response;
+        });
+
+        image = {
+          isUploading: function() {
+            return isUploading;
+          },
+          progress: function() {
+            return percent;
+          },
+          getPreview: function() {
+            return src;
+          },
+          abort: $scope.upload.abort,
+          name: file.name
+        };
+
+        $scope.formData.images.push(image);
+
+        // Preview the image
+        var reader = new FileReader();
+        reader.onload = function() {
+          src = reader.result;
+          $scope.$apply();
+        };
+        reader.readAsDataURL(file);
+
+      });
     };
   });

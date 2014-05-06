@@ -68,6 +68,50 @@
         </button>
       </fieldset>
 
+      <fieldset class="images" ng-file-drag-over-class="dragOver"
+        ng-file-drop="onFileSelect($files)">
+        <legend>Images</legend>
+        <div>
+          <div class="drop">
+            <span class="btn btn-default" onclick="$(this).find('input').get(0).click();">
+              Upload Image
+              <input accept="image/*" type="file" multiple ng-file-select="onFileSelect($files)">
+            </span>
+            <b>OR</b>
+            Drag And Drop your images here
+            <br>
+            <input type="text" class="form-control" ng-model="imageUrl" placeholder="Alternatively you can enter the URL of the image here">
+            <button type="button" ng-click="addUrlImage()" class="btn btn-default">Add image</button>
+          </div>
+
+          <br/>
+
+          <div ui-sortable ng-model="formData.images">
+            <div ng-repeat="image in formData.images" class="gallery-box">
+              <span class="title">{{image.name}}</span>
+              <div class="thumbnail">
+                <div class="img" style="background-image:url({{image.getPreview()}})"></div>
+              </div>
+              <div class="progress progress-striped" ng-class="{active: image.isUploading()}">
+                <div class="progress-bar" role="progressbar"
+                     aria-valuenow="{{image.progress() * 100}}"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     ng-style="{width: (image.progress() * 100) + '%'}">
+                  <span class="sr-only">{{image.progress()}}% Complete</span>
+                </div>
+              </div>
+              <div class="btn-group">
+                <a class="btn btn-xs btn-danger" ng-click="cancelImage($index)">
+                  Remove
+                </a>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </fieldset>
+
       <fieldset ng-hide="modal">
         <legend>Connected Event</legend>
         <div class="form-group" ng-class="{'has-error':invalidEvent}">

@@ -9,7 +9,9 @@ var app = angular
     'ngSanitize',
     'ngRoute',
     'mgcrea.ngStrap.datepicker',
-    'mgcrea.ngStrap.typeahead'
+    'mgcrea.ngStrap.typeahead',
+    'angularFileUpload',
+    'ui.sortable'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -63,9 +65,11 @@ app.factory('appSettings', function() {
 
   return {
     urls: {
-      embedCode: 'http://localhost/EurecomProject/apps4europe-frontend/dist/app.bundle.js',
+      embedCode: 'http://localhost/EurecomProject/event-website/dist/app.bundle.js',
       events: BASE_URL + '/events',
       applications: BASE_URL + '/applications',
+      imageUpload: BASE_URL + '/images',
+      staticFiles: BASE_URL + '/static',
       login: BASE_URL + '/login',
       register: BASE_URL + '/users',
       users: BASE_URL + '/users'
