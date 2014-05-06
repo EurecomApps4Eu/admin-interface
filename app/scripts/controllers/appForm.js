@@ -32,7 +32,7 @@ angular.module('apps4europeAdminInterfaceApp')
     // Init default values
     $scope.formData = {
       published: true,
-      datasets: [''],
+      datasets: [{}],
       images: []
     };
 

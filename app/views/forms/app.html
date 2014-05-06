@@ -49,13 +49,16 @@
         <table class="table table-hover table-striped table-responsive">
           <thead>
             <tr>
-              <th>Dataset URL</th><th></th>
+              <th>URL</th><th>Description</th><th></th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="dataset in formData.datasets track by $index">
               <td>
-                <input type="text" class="form-control" ng-model="formData.datasets[$index]" placeholder="Enter dataset URL">
+                <input type="text" class="form-control" ng-model="formData.datasets[$index].url" placeholder="Enter dataset URL">
+              </td>
+              <td>
+                <textarea class="form-control" ng-model="formData.datasets[$index].description" placeholder="Enter dataset description"></textarea>
               </td>
               <td>
                 <button type="button" ng-click="formData.datasets.splice($index,1)" class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i></button>
@@ -63,7 +66,7 @@
             </tr>
           </tbody>
         </table>
-        <button type="button" class="btn btn-default" ng-click="formData.datasets.push('')">
+        <button type="button" class="btn btn-default" ng-click="formData.datasets.push({})">
           <i class="glyphicon glyphicon-plus"></i> Add dataset
         </button>
       </fieldset>
