@@ -115,4 +115,8 @@ form {
       display:inline-block;
     }
   }
+
+  .required label:after {
+    content:" *";
+  }
 }

@@ -33,7 +33,8 @@ angular.module('apps4europeAdminInterfaceApp')
     $scope.formData = {
       published: true,
       datasets: [{}],
-      images: []
+      images: [],
+      authors: [{}]
     };
 
     if ( $routeParams.id ) {

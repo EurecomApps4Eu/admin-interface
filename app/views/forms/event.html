@@ -2,34 +2,43 @@
   <div class="col-md-12">
     <h2 ng-show="!editMode">Create event</h2>
     <h2 ng-show="editMode">Edit event</h2>
+    <div class="alert alert-info">
+      <i class="fa fa-info-circle"></i> Fields marked with an asterisk (*) are required fields.
+    </div>
     <form role="form" ng-submit="saveEvent()" name="form">
       <fieldset>
-        <div class="form-group">
+        <div class="form-group required">
           <label for="title">Title</label>
           <input name="title" type="text" class="form-control" required ng-model="formData.title" id="title" placeholder="Enter title">
           <div class="alert alert-danger" ng-show="form.title.$dirty && form.title.$invalid">
-            Title is required.
+            Please enter the title of the event.
           </div>
         </div>
 
-        <div class="form-group date">
+        <div class="form-group date required">
           <label for="startDate">Start date</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            <input type="text" bs-datepicker data-autoclose="true" data-date-format="yyyy-MM-dd" class="form-control" ng-model="formData.startDate" id="startDate" placeholder="Start date">
+            <input type="text" required bs-datepicker data-autoclose="true" data-date-format="yyyy-MM-dd" class="form-control" ng-model="formData.startDate" name="startDate" id="startDate" placeholder="Start date">
           </div>
         </div>
-        <div class="form-group date endDate">
+        <div class="form-group date endDate required">
           <label for="endDate">End date</label>
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            <input type="text" bs-datepicker data-autoclose="true" data-date-format="yyyy-MM-dd" class="form-control" ng-model="formData.endDate" id="endDate" placeholder="End date">
+            <input type="text" required bs-datepicker data-autoclose="true" data-date-format="yyyy-MM-dd" class="form-control" ng-model="formData.endDate" name="endDate" id="endDate" placeholder="End date">
           </div>
         </div>
+        <div class="alert alert-danger" ng-show="form.startDate.$dirty && form.endDate.$dirty && (form.startDate.$invalid || form.endDate.$invalid)">
+          Please enter the start and end date of the event.
+        </div>
 
-        <div class="form-group">
+        <div class="form-group required">
           <label for="location">Location</label>
-          <input ng-options="address.formatted_address as address.formatted_address for address in getAddress($viewValue)" bs-typeahead type="text" class="form-control" ng-model="formData.location" id="location" placeholder="Enter location">
+          <input required ng-options="address.formatted_address as address.formatted_address for address in getAddress($viewValue)" bs-typeahead type="text" class="form-control" ng-model="formData.location" name="location" id="location" placeholder="Enter location">
+          <div class="alert alert-danger" ng-show="form.location.$dirty && form.location.$invalid">
+            Please enter the location of the event.
+          </div>
         </div>
 
         <div class="form-group">
@@ -37,14 +46,17 @@
           <input type="text" class="form-control" ng-model="formData.registrationLink" id="registrationLink" placeholder="Enter a link to the registration for the event">
         </div>
 
-        <div class="form-group">
+        <div class="form-group required">
           <label for="theme">Theme</label>
-          <select class="form-control" ng-model="formData.theme" id="theme" ng-options="theme for theme in themes">
+          <select required class="form-control" ng-model="formData.theme" name="theme" id="theme" ng-options="theme for theme in themes">
             <option value="">Choose event theme</option>
           </select>
+          <div class="alert alert-danger" ng-show="form.theme.$dirty && form.theme.$invalid">
+            Please choose a theme for the event.
+          </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group required">
           <label for="text">Description</label>
           <textarea class="form-control wysiwyg" id="text"></textarea>
         </div>
@@ -146,7 +158,7 @@
       </fieldset>
 
       <div class="alert alert-danger" ng-show="form.$invalid">
-        You must fill all required fields before you can save the event.
+        You must fill all required fields marked with an asterisk (*), before you can save the event!
       </div>
 
       <fieldset>

@@ -1,9 +1,12 @@
 <div class="row event">
   <div class="col-md-12">
     <h2>{{title}}</h2>
+    <div class="alert alert-info">
+      <i class="fa fa-info-circle"></i> Fields marked with an asterisk (*) are required fields.
+    </div>
     <form role="form" ng-hide="modalSaved" ng-submit="saveApp()" name="form">
       <fieldset>
-        <div class="form-group">
+        <div class="form-group required">
           <label for="title">Title</label>
           <input name="title" required type="text" class="form-control" ng-model="formData.title" id="title" placeholder="Enter title">
           <div class="alert alert-danger" ng-show="form.title.$dirty && form.title.$invalid">
@@ -11,7 +14,7 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group required">
           <label for="text">Description</label>
           <textarea class="form-control wysiwyg" id="text"></textarea>
         </div>
@@ -38,6 +41,33 @@
           <label for="downloadUrl">Download URL</label>
           <input type="url" class="form-control" ng-model="formData.downloadUrl" id="downloadUrl" placeholder="Enter app download URL">
         </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Authors</legend>
+        <table class="table table-hover table-striped table-responsive">
+          <thead>
+            <tr>
+              <th>Name</th><th>E-mail</th><th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="author in formData.authors">
+              <td>
+                <input type="text" class="form-control" ng-model="formData.authors[$index].name" placeholder="Enter author name">
+              </td>
+              <td>
+                <input type="email" class="form-control" ng-model="formData.authors[$index].email" placeholder="Enter author e-mail">
+              </td>
+              <td>
+                <button type="button" ng-click="formData.authors.splice($index,1)" class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-default" ng-click="formData.authors.push({})">
+          <i class="glyphicon glyphicon-plus"></i> Add author
+        </button>
       </fieldset>
 
       <fieldset>
@@ -116,19 +146,19 @@
       </fieldset>
 
       <fieldset ng-hide="modal">
-        <legend>Connected Event</legend>
+        <legend>Connected Event *</legend>
         <div class="form-group" ng-class="{'has-error':invalidEvent}">
           <input ng-change="setEvent()" type="text" class="form-control" ng-model="connectedEventTitle" ng-options="event.title as event.title for event in events" placeholder="Enter event title" bs-typeahead>
           <div ng-show="invalidEvent" class="alert alert-danger">No matching event found!</div>
         </div>
       </fieldset>
 
-      <div class="alert alert-danger" ng-show="form.$invalid">
+      <div class="alert alert-danger" ng-show="form.$invalid || invalidEvent || !connectedEventTitle">
         You must fill all required fields before you can save the app.
       </div>
 
       <fieldset>
-        <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> {{saveBtnTitle}}</button>
+        <button type="submit" ng-disabled="form.$invalid || invalidEvent || !connectedEventTitle" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> {{saveBtnTitle}}</button>
         <button type="button" class="btn btn-default" ng-click="closeModal()" ng-show="modal">Cancel</button>
         <button ng-show="editMode" ng-click="deleteApp()" type="button" class="btn btn-danger">
           <i class="glyphicon glyphicon-trash"></i>
