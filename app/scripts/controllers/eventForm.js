@@ -127,4 +127,15 @@ angular.module('apps4europeAdminInterfaceApp')
         });
       }
     };
+
+    // Autocomplete for location
+    $scope.getAddress = function(viewValue) {
+      var params = {address: viewValue, sensor: false};
+      return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {params: params})
+      .then(function(res) {
+        return res.data.results;
+      });
+    };
+
+
   });
