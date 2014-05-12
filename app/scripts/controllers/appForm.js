@@ -1,4 +1,4 @@
-/*global confirm,$:false */
+/*global alert,confirm,$:false */
 
 'use strict';
 
@@ -226,6 +226,19 @@ angular.module('apps4europeAdminInterfaceApp')
         }).success(function(response) {
           isUploading = false;
           image.tmpName = response;
+        }).error(function() {
+          // Find and delete the image from $scope
+          for ( var i = $scope.formData.images.length - 1; i >= 0; i -- ) {
+
+            var candidate = $scope.formData.images[i];
+
+            if ( candidate.name === image.name ) {
+              $scope.formData.images.splice(i, 1);
+              break;
+            }
+          }
+
+          alert('Upload failed! Maximum size for file is 8 MB.');
         });
 
         image = {

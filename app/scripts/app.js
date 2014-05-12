@@ -236,7 +236,7 @@ app.factory('apps', function($http, appSettings) {
 });
 
 // TODO: send the auth token always here, instead of in the individual functions
-app.factory('httpRequestInterceptor', function () {
+app.factory('httpRequestInterceptor', function($q) {
   return {
     request: function (config) {
       $('body').addClass('loading');
@@ -245,6 +245,10 @@ app.factory('httpRequestInterceptor', function () {
     response: function(response) {
       $('body').removeClass('loading');
       return response;
+    },
+    responseError: function(response) {
+      $('body').removeClass('loading');
+      return $q.reject(response);
     }
   };
 });
