@@ -49,7 +49,10 @@ angular.module('apps4europeAdminInterfaceApp')
     }
     else {
       $scope.formData = {
-        juryMembers: [{}]
+        juryMembers: [{}],
+        contacts: [{}],
+        organizers: [{}],
+        sponsors: [{}]
       };
     }
 

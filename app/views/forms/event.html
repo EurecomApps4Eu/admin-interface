@@ -72,6 +72,90 @@
         </div>
       </fieldset>
 
+      <fieldset>
+        <legend>Contact Point</legend>
+        <table class="table table-hover table-striped table-responsive">
+          <thead>
+            <tr>
+              <th>Name</th><th>E-mail</th><th>Phone</th><th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="contact in formData.contacts">
+              <td>
+                <input type="text" class="form-control" ng-model="formData.contacts[$index].name" placeholder="Enter contact name">
+              </td>
+              <td>
+                <input type="email" class="form-control" ng-model="formData.contacts[$index].email" placeholder="Enter contact e-mail">
+              </td>
+              <td>
+                <input type="text" class="form-control" ng-model="formData.contacts[$index].phone" placeholder="Enter contact phone">
+              </td>
+              <td>
+                <button type="button" ng-click="formData.contacts.splice($index,1)" class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-default" ng-click="formData.contacts.push({})">
+          <i class="glyphicon glyphicon-plus"></i> Add contact
+        </button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Organizers</legend>
+        <table class="table table-hover table-striped table-responsive">
+          <thead>
+            <tr>
+              <th>Organizer name</th><th>Organizer website</th><th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="contact in formData.organizers">
+              <td>
+                <input type="text" class="form-control" ng-model="formData.organizers[$index].name" placeholder="Enter organizer name">
+              </td>
+              <td>
+                <input type="url" class="form-control" ng-model="formData.organizers[$index].url" placeholder="Enter organizer website">
+              </td>
+              <td>
+                <button type="button" ng-click="formData.organizers.splice($index,1)" class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-default" ng-click="formData.organizers.push({})">
+          <i class="glyphicon glyphicon-plus"></i> Add organizer
+        </button>
+      </fieldset>
+
+      <fieldset>
+        <legend>Sponsors</legend>
+        <table class="table table-hover table-striped table-responsive">
+          <thead>
+            <tr>
+              <th>Sponsor name</th><th>Sponsor website</th><th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="sponsor in formData.sponsors">
+              <td>
+                <input type="text" class="form-control" ng-model="formData.sponsors[$index].name" placeholder="Enter sponsor name">
+              </td>
+              <td>
+                <input type="url" class="form-control" ng-model="formData.sponsors[$index].url" placeholder="Enter sponsor website">
+              </td>
+              <td>
+                <button type="button" ng-click="formData.sponsors.splice($index,1)" class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-default" ng-click="formData.sponsors.push({})">
+          <i class="glyphicon glyphicon-plus"></i> Add sponsor
+        </button>
+      </fieldset>
+
       <fieldset class="prizes">
         <legend>Prizes</legend>
         <div class="alert alert-info">
