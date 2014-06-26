@@ -29,6 +29,7 @@ angular.module('apps4europeAdminInterfaceApp')
     if ( $routeParams.id ) {
       $scope.editMode = true;
       $scope.eventId = $routeParams.id;
+      $scope.embedCodeUrl = appSettings.urls.embedCode;
       $http({
         method:'GET',
         url:appSettings.urls.events + '/' + $routeParams.id,

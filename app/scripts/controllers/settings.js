@@ -5,14 +5,9 @@ angular.module('apps4europeAdminInterfaceApp')
 
     initApp('settings');
 
-    var user = JSON.parse(window.localStorage.getItem('user'));
-
     $http({
       method:'GET',
       url:appSettings.urls.users + '/me',
-      headers: {
-        Authorization: 'Token ' + user.token
-      }
     })
     .success(function(data) {
       $scope.formData = data;
@@ -23,9 +18,6 @@ angular.module('apps4europeAdminInterfaceApp')
       $http({
         method:'PUT',
         url:appSettings.urls.users + '/' + $scope.formData._id,
-        headers: {
-          Authorization: 'Token ' + user.token
-        },
         data: $scope.formData
       })
       .success(function() {

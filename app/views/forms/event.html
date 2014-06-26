@@ -5,6 +5,10 @@
     <div class="alert alert-info">
       <i class="fa fa-info-circle"></i> Fields marked with an asterisk (*) are required fields.
     </div>
+    <div ng-show="{{editMode}}" class="alert alert-success">
+      You can embed the event on your webpage using the code below.
+      <pre>&lt;script id="apps4europeScript" src="{{embedCodeUrl}}" data-event-id="{{formData._id}}"&gt;&lt;/script&gt;</pre>
+    </div>
     <form role="form" ng-submit="saveEvent()" name="form">
       <fieldset>
         <div class="form-group required">
@@ -39,6 +43,11 @@
           <div class="alert alert-danger" ng-show="form.location.$dirty && form.location.$invalid">
             Please enter the location of the event.
           </div>
+        </div>
+
+        <div class="form-group required">
+          <label for="language">Language</label>
+          <input class="form-control" ng-model="formData.language" name="language" id="language" placeholder="Enter language">
         </div>
 
         <div class="form-group">

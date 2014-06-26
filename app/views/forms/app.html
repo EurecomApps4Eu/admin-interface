@@ -32,6 +32,12 @@
           <div class="alert alert-info"><i class="glyphicon glyphicon-info-sign"></i> Only published apps are visible on event webpage.</div>
         </div>
 
+        <div class="form-group checkbox">
+          <label for="isAppConceptOnly">This is an application concept only
+            <input type="checkbox" value="1" ng-model="formData.isAppConceptOnly" id="isAppConceptOnly">
+          </label>
+        </div>
+
         <div class="form-group">
           <label for="homepage">Homepage</label>
           <input type="url" class="form-control" ng-model="formData.homepage" id="homepage" placeholder="Enter app homepage">

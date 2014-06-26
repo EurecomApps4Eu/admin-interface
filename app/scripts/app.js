@@ -235,10 +235,15 @@ app.factory('apps', function($http, appSettings) {
 
 });
 
-// TODO: send the auth token always here, instead of in the individual functions
-app.factory('httpRequestInterceptor', function($q) {
+app.factory('httpRequestInterceptor', function($q, $rootScope) {
   return {
     request: function (config) {
+      var user = JSON.parse(window.localStorage.getItem('user'));
+
+      if ( user ) {
+        config.headers.Authorization = 'Token ' + user.token;
+      }
+
       $('body').addClass('loading');
       return config;
     },
@@ -248,6 +253,11 @@ app.factory('httpRequestInterceptor', function($q) {
     },
     responseError: function(response) {
       $('body').removeClass('loading');
+
+      if ( response.data === 'Invalid access token' ) {
+        $rootScope.signOut();
+      }
+
       return $q.reject(response);
     }
   };
