@@ -129,7 +129,7 @@
             <div ng-repeat="image in formData.images" class="gallery-box">
               <span class="title">{{image.name}}</span>
               <div class="thumbnail">
-                <div class="img" style="background-image:url({{image.getPreview()}})"></div>
+                <div class="img" style="background-image:url('{{image.getPreview()}}')"></div>
               </div>
               <div class="progress progress-striped" ng-class="{active: image.isUploading()}">
                 <div class="progress-bar" role="progressbar"
