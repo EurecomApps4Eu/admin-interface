@@ -105,6 +105,10 @@ angular.module('apps4europeAdminInterfaceApp')
       $scope.formData.published = false;
       $scope.modal = true;
       $scope.formData.connectedEvent = $routeParams.connectedEvent;
+
+      // Need to set this because of form validation (although the value doesn't matter)
+      $scope.connectedEventTitle = 'anything here';
+
       $('body').addClass('isModal');
 
       (function updateModalHeight() {

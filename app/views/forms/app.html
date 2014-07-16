@@ -1,7 +1,7 @@
 <div class="row event">
   <div class="col-md-12">
     <h2>{{title}}</h2>
-    <div class="alert alert-info">
+    <div class="alert alert-info" ng-hide="modalSaved">
       <i class="fa fa-info-circle"></i> Fields marked with an asterisk (*) are required fields.
     </div>
     <form role="form" ng-hide="modalSaved" ng-submit="saveApp()" name="form">
